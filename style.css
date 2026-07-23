@@ -106,33 +106,6 @@ header{
     width: auto;
 }
 
-@media (max-width: 1024px) {
-    .home-container {
-        flex-direction: column;
-        text-align: center;
-        gap: 60px;
-        margin-top: 40px;
-    }
-
-    .home-content {
-        align-items: center;
-    }
-
-    .home-illustration-studant {
-        height: 350px;
-    }
-    
-    .cursos-cards {
-        width: 100%;
-        align-items: center;
-    }
-    
-    .card-curso {
-        width: 100%;
-        max-width: 350px;
-    }
-}
-
 main{
     flex: 1;
     padding: 40px 80px;
@@ -176,4 +149,96 @@ footer{
 .icon-social{
     width: 180px;
     cursor: pointer;
+}
+
+
+/* =========================================
+   TELA DE CURSOS (DS / REDES)
+   ========================================= */
+
+.top-bar-curso {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #E6E8F2; 
+    padding: 10px 40px;
+    margin: -40px -80px 40px -80px;
+}
+
+.filtro-status {
+    background-color: #3347B0;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.legenda-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: bold;
+    color: #3347B0;
+    font-size: 14px;
+}
+
+.quadrado-legenda {
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+}
+.legenda-azul { background-color: #3347B0; }
+.legenda-amarelo { background-color: #E5B657; }
+
+.titulo-ds {
+    font-size: 48px;
+    color: #3347B0;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.grid-alunos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+}
+
+.card-aluno-mock {
+    width: 200px;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 6px 6px 10px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+}
+
+.card-aluno-mock:hover {
+    transform: scale(1.05);
+}
+
+.card-aluno-mock img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover; 
+}
+
+.card-aluno-mock h3 {
+    color: white;
+    font-size: 14px;
+    margin-top: auto;
+    font-weight: bold;
+}
+
+.bg-cursando {
+    background-color: #3347B0;
+}
+
+.bg-finalizado {
+    background-color: #E5B657;
 }
