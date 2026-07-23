@@ -12,3 +12,13 @@ export async function getAlunosPorCurso(cursoId) {
     
     return response.json()
 }
+
+export async function getAluno(id) {
+    const response = await fetch(`${URL}/alunos/${id}`)
+    
+    if (!response.ok) {
+        throw new Error('Erro ao buscar dados do aluno')   
+    }
+    
+    return response.json()
+}

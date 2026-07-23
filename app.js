@@ -1,6 +1,6 @@
 'use strict'
 
-import { getAlunosPorCurso } from './api.js'
+import { getAlunosPorCurso, getAluno } from './api.js'
 
 window.addEventListener('DOMContentLoaded', () => {
     entradaCursos()
