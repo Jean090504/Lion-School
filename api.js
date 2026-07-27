@@ -22,3 +22,4 @@ export async function getAluno(id) {
     
     return response.json()
 }
+

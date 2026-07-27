@@ -198,6 +198,8 @@ async function carregarDS() {
 
             card.appendChild(img)
             card.appendChild(nome)
+
+            card.addEventListener('click', () => carregarAluno(aluno.id || aluno.matricula))
             
             gridAlunos.appendChild(card)
         })
@@ -328,6 +330,84 @@ async function carregarRDS() {
         erroMsg.textContent = 'Falha ao carregar alunos. Verifique a conexão com a API.'
         gridAlunos.appendChild(erroMsg)
     }
+}
+
+async function carregarAluno(id) {
+    const main = document.querySelector('main')
+    main.textContent = ''
+
+    const txtSair = document.querySelector('.sairTxt')
+    if (txtSair) txtSair.textContent = 'Voltar'
+
+    const section = document.createElement('section')
+    section.classList.add('aluno-detalhes-container')
+    
+    try {
+            const aluno = await getAluno(id)
+
+            const cardPerfil = document.createElement('div')
+            cardPerfil.classList.add('card-perfil-aluno')
+
+            const imgPerfil = document.createElement('img')
+            imgPerfil.src = aluno.foto
+            imgPerfil.alt = `Foto de ${aluno.nome}`
+
+            const nomeAluno = document.createElement('h2')
+            nomeAluno.textContent = aluno.nome;
+
+            cardPerfil.append(imgPerfil, nomeAluno)
+
+            const containerGrafico = document.createElement('div')
+            containerGrafico.classList.add('container-grafico')
+
+            const notasDesempenho = aluno.desempenho || []
+
+            notasDesempenho.forEach(disc => {
+                const barraContainer = document.createElement('div')
+                barraContainer.classList.add('barra-container')
+
+                const notaValue = Number(disc.nota || disc.media || disc.valor)
+
+                const notaText = document.createElement('span')
+                notaText.classList.add('nota-texto')
+                notaText.textContent = notaValue
+
+                const barraTrack = document.createElement('div')
+                barraTrack.classList.add('barra-track')
+
+                const barraFill = document.createElement('div')
+                barraFill.classList.add('barra-fill')
+                barraFill.style.height = `${notaValue}%`
+
+                if (notaValue >= 80) {
+                    barraFill.style.backgroundColor = '#3347B0' // Azul
+                    notaText.style.color = '#3347B0'
+                } else if (notaValue >= 50) {
+                    barraFill.style.backgroundColor = '#E5B657' // Amarelo
+                    notaText.style.color = '#E5B657'
+                } else {
+                    barraFill.style.backgroundColor = '#C20000' // Vermelho
+                    notaText.style.color = '#C20000'
+                }
+
+                const siglaText = document.createElement('span')
+                siglaText.classList.add('sigla-texto')
+                siglaText.textContent = disc.sigla || disc.nome
+
+                barraTrack.appendChild(barraFill)
+                barraContainer.append(notaText, barraTrack, siglaText)
+                containerGrafico.appendChild(barraContainer)
+            });
+
+            section.append(cardPerfil, containerGrafico)
+            main.appendChild(section)
+
+        } catch (erro) {
+            console.error("Erro ao carregar detalhes do aluno:", erro)
+            const erroMsg = document.createElement('p')
+            erroMsg.textContent = 'Falha ao carregar informações do aluno.'
+            main.appendChild(erroMsg)
+        }
 }
 
 window.carregarDS = carregarDS
