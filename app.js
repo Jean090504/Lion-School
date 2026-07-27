@@ -320,6 +320,8 @@ async function carregarRDS() {
 
             card.appendChild(img)
             card.appendChild(nome)
+
+            card.addEventListener('click', () => carregarAluno(aluno.id || aluno.matricula))
             
             gridAlunos.appendChild(card)
         })
@@ -397,7 +399,7 @@ async function carregarAluno(id) {
                 barraTrack.appendChild(barraFill)
                 barraContainer.append(notaText, barraTrack, siglaText)
                 containerGrafico.appendChild(barraContainer)
-            });
+            })
 
             section.append(cardPerfil, containerGrafico)
             main.appendChild(section)
